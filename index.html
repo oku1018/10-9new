@@ -3,15 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ちーちゃんに会えるまで</title>
+<title>君に会えるまで</title>
 
 <style>
-
-/* =========================
-   基本設定
-========================= */
-
 *{
     box-sizing:border-box;
 }
@@ -20,150 +14,184 @@ html,body{
     margin:0;
     width:100%;
     min-height:100%;
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    background:#ffffff;
+    color:#333;
 }
 
 body{
     min-height:100vh;
-    overflow:hidden;
-    color:#fff;
-    font-family:
-        "Hiragino Kaku Gothic ProN",
-        "Yu Gothic",
-        sans-serif;
-
+    position:relative;
+    overflow-x:hidden;
     background:
-        radial-gradient(circle at 50% 120%,
-            #24376b 0%,
-            #111a3b 35%,
-            #050815 75%,
-            #02030a 100%);
+        radial-gradient(circle at top left, rgba(255,230,230,0.7), transparent 28%),
+        radial-gradient(circle at top right, rgba(230,240,255,0.8), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #fffdf8 100%);
+}
 
+/* =========================
+   お祭りの背景飾り
+========================= */
+
+.festival-top{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1;
+    pointer-events:none;
+}
+
+.lantern-row{
+    display:flex;
+    justify-content:space-evenly;
+    align-items:flex-start;
+    padding:8px 10px 0;
+}
+
+.lantern{
+    width:42px;
+    height:56px;
+    background:linear-gradient(180deg,#ff4d4d,#d91f1f);
+    border-radius:18px;
+    position:relative;
+    box-shadow:0 6px 15px rgba(0,0,0,0.12);
+    animation:lanternSwing 3s ease-in-out infinite;
+}
+
+.lantern::before{
+    content:"";
+    position:absolute;
+    top:-18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:2px;
+    height:18px;
+    background:#555;
+}
+
+.lantern::after{
+    content:"祭";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    color:#fff6d8;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.lantern:nth-child(even){
+    background:linear-gradient(180deg,#4a90ff,#1f4fd9);
+}
+
+.lantern:nth-child(2){ animation-delay:.2s; }
+.lantern:nth-child(3){ animation-delay:.4s; }
+.lantern:nth-child(4){ animation-delay:.6s; }
+.lantern:nth-child(5){ animation-delay:.8s; }
+.lantern:nth-child(6){ animation-delay:1s; }
+
+@keyframes lanternSwing{
+    0%,100%{ transform:rotate(-2deg); }
+    50%{ transform:rotate(2deg); }
+}
+
+.festival-line{
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,#e53935,#ffffff,#1e88e5,#ffffff,#e53935);
+}
+
+/* =========================
+   サイドキャラ
+========================= */
+
+.side-character{
+    position:fixed;
+    z-index:2;
+    pointer-events:none;
+}
+
+.side-character img{
+    width:100%;
+    height:auto;
+    display:block;
+    filter:drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+}
+
+.chikawa{
+    left:10px;
+    bottom:35px;
+    width:min(18vw,140px);
+}
+
+.hatiware{
+    right:10px;
+    top:140px;
+    width:min(18vw,140px);
+}
+
+.usagi{
+    right:10px;
+    bottom:35px;
+    width:min(18vw,140px);
+}
+
+/* =========================
+   メインコンテナ
+========================= */
+
+.wrapper{
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-}
-
-
-/* =========================
-   夜空
-========================= */
-
-#sky{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-    z-index:0;
-}
-
-.star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:white;
-    border-radius:50%;
-    opacity:.7;
-
-    animation:twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle{
-    0%{
-        opacity:.2;
-        transform:scale(.7);
-    }
-
-    100%{
-        opacity:1;
-        transform:scale(1.4);
-    }
-}
-
-
-/* =========================
-   月
-========================= */
-
-.moon{
-    position:absolute;
-
-    width:130px;
-    height:130px;
-
-    top:7%;
-    right:8%;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(circle at 35% 35%,
-            #fffef5,
-            #fff8cc 40%,
-            #e9dca6 100%);
-
-    box-shadow:
-        0 0 25px rgba(255,246,190,.5),
-        0 0 70px rgba(255,246,190,.25);
-
-    animation:moonFloat 6s ease-in-out infinite;
-}
-
-@keyframes moonFloat{
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-10px);
-    }
-}
-
-
-/* =========================
-   メインカード
-========================= */
-
-.container{
+    padding:100px 20px 50px;
     position:relative;
     z-index:5;
+}
 
-    width:min(92%,580px);
-
+.container{
+    width:min(92%, 620px);
+    background:rgba(255,255,255,0.92);
+    border:3px solid #f2d7a1;
+    border-radius:28px;
+    padding:35px 28px 30px;
     text-align:center;
+    box-shadow:0 12px 35px rgba(0,0,0,0.10);
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    inset:10px;
+    border:2px dashed rgba(230,57,53,0.18);
+    border-radius:20px;
+    pointer-events:none;
 }
 
 .small-title{
+    color:#d94b2b;
+    letter-spacing:.2em;
     font-size:.8rem;
-    letter-spacing:.35em;
-
-    color:rgba(255,255,255,.6);
-
-    margin-bottom:15px;
+    margin-bottom:10px;
+    font-weight:bold;
 }
 
 h1{
-    margin:0 0 8px;
-
-    font-family:
-        "Yu Mincho",
-        "Hiragino Mincho ProN",
-        serif;
-
-    font-weight:400;
-
-    font-size:clamp(2rem,7vw,3.3rem);
-
-    letter-spacing:.08em;
+    margin:0 0 10px;
+    font-size:clamp(2rem,6vw,3rem);
+    color:#d62828;
 }
 
 .subtitle{
-    margin-bottom:38px;
-
-    color:rgba(255,255,255,.65);
-
-    font-size:.9rem;
+    color:#666;
+    margin-bottom:24px;
+    line-height:1.8;
+    font-size:.95rem;
 }
-
 
 /* =========================
    カウントダウン
@@ -171,228 +199,152 @@ h1{
 
 .countdown{
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:10px;
-
-    margin-bottom:30px;
+    margin-bottom:22px;
 }
 
 .time-box{
-    padding:19px 4px;
-
-    border-radius:20px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border:
-        1px solid rgba(255,255,255,.13);
-
-    backdrop-filter:
-        blur(15px);
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.2);
+    background:linear-gradient(180deg,#fff8ef,#fff2dc);
+    border:2px solid #f4d7a1;
+    border-radius:18px;
+    padding:16px 4px;
+    box-shadow:0 5px 12px rgba(0,0,0,.05);
 }
 
 .number{
     display:block;
-
-    font-size:
-        clamp(1.8rem,7vw,3rem);
-
-    font-weight:300;
-
-    letter-spacing:.02em;
+    font-size:clamp(1.7rem,6vw,2.8rem);
+    font-weight:bold;
+    color:#c62828;
 }
 
 .label{
     display:block;
-
-    margin-top:3px;
-
-    font-size:.65rem;
-
-    letter-spacing:.15em;
-
-    color:
-        rgba(255,255,255,.55);
+    margin-top:4px;
+    font-size:.68rem;
+    letter-spacing:.12em;
+    color:#8c6d3f;
 }
-
 
 /* =========================
-   今日のメッセージ
-========================= */
-
-.message-area{
-    min-height:100px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    margin-top:12px;
-}
-
-.message{
-    position:relative;
-
-    font-family:
-        "Yu Mincho",
-        "Hiragino Mincho ProN",
-        serif;
-
-    font-size:
-        clamp(.95rem,3.7vw,1.15rem);
-
-    line-height:2;
-
-    letter-spacing:.05em;
-
-    color:
-        rgba(255,255,255,.86);
-
-    transition:
-        opacity .8s,
-        transform .8s;
-}
-
-.message::before{
-    content:"“";
-
-    font-size:3rem;
-
-    position:absolute;
-
-    left:-26px;
-    top:-20px;
-
-    color:
-        rgba(255,255,255,.12);
-}
-
-
-/* =========================
-   節目タイトル
+   特別表示
 ========================= */
 
 .special-label{
     display:inline-block;
-
-    max-height:0;
-
+    background:linear-gradient(90deg,#e53935,#ffb300,#1e88e5);
+    color:#fff;
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:.8rem;
+    letter-spacing:.1em;
+    margin-bottom:14px;
     opacity:0;
-
-    overflow:hidden;
-
-    font-size:.75rem;
-
-    letter-spacing:.25em;
-
-    color:#ffeaa7;
-
-    transition:.8s;
+    transform:translateY(-8px);
+    transition:.4s;
+    pointer-events:none;
 }
 
 .special-label.show{
-    max-height:50px;
-
     opacity:1;
-
-    margin-bottom:12px;
+    transform:translateY(0);
 }
 
+.message-area{
+    min-height:90px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.message{
+    color:#444;
+    font-size:1rem;
+    line-height:1.9;
+    max-width:90%;
+}
 
 /* =========================
-   秘密の手紙ボタン
+   完了後メッセージ
+========================= */
+
+.final-message{
+    display:none;
+    margin-top:20px;
+    animation:fadeUp .8s ease;
+}
+
+.finished .countdown{
+    display:none;
+}
+
+.finished .final-message{
+    display:block;
+}
+
+.final-message h2{
+    margin:0 0 15px;
+    font-size:clamp(2rem,7vw,3rem);
+    color:#d62828;
+}
+
+.final-message p{
+    line-height:2;
+    color:#444;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   隠し手紙ボタン
 ========================= */
 
 .letter-button{
     position:fixed;
-
     right:22px;
     bottom:22px;
-
-    width:57px;
-    height:57px;
-
+    width:64px;
+    height:64px;
     border:none;
-
     border-radius:50%;
-
+    background:linear-gradient(180deg,#fff5db,#ffe1a8);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    font-size:1.7rem;
     cursor:pointer;
-
     z-index:20;
-
-    font-size:1.6rem;
-
-    background:
-        rgba(255,255,255,.12);
-
-    border:
-        1px solid rgba(255,255,255,.2);
-
-    backdrop-filter:
-        blur(12px);
-
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.3);
-
-    transition:.3s;
-
-    animation:
-        letterFloat 4s ease-in-out infinite;
+    transition:.25s;
 }
 
 .letter-button:hover{
-    transform:scale(1.12);
-    background:
-        rgba(255,255,255,.22);
+    transform:scale(1.08);
 }
-
-@keyframes letterFloat{
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-7px);
-    }
-}
-
 
 /* =========================
-   手紙画面
+   手紙
 ========================= */
 
 .letter-overlay{
     position:fixed;
-
     inset:0;
-
-    z-index:100;
-
+    background:rgba(0,0,0,0.45);
     display:flex;
-
     justify-content:center;
     align-items:center;
-
     padding:20px;
-
-    background:
-        rgba(2,5,18,.86);
-
-    backdrop-filter:
-        blur(12px);
-
+    z-index:100;
     opacity:0;
-
     visibility:hidden;
-
-    transition:.6s;
+    transition:.35s;
 }
 
 .letter-overlay.open{
@@ -402,1224 +354,521 @@ h1{
 
 .letter-paper{
     width:min(92%,540px);
-
     max-height:82vh;
-
     overflow-y:auto;
-
-    padding:
-        45px 35px;
-
-    border-radius:8px;
-
-    color:#4a403a;
-
-    text-align:left;
-
-    background:
-        linear-gradient(
-            #fffdf8,
-            #fff9ec
-        );
-
-    box-shadow:
-        0 25px 80px
-        rgba(0,0,0,.55);
-
-    transform:
-        translateY(40px)
-        scale(.94);
-
-    transition:
-        .65s
-        cubic-bezier(.2,.8,.2,1);
+    background:linear-gradient(180deg,#fffdf6,#fff7e6);
+    color:#4d4033;
+    border-radius:12px;
+    padding:35px 28px;
+    box-shadow:0 18px 40px rgba(0,0,0,.22);
+    transform:translateY(20px) scale(.96);
+    transition:.35s;
 }
 
-.letter-overlay.open
-.letter-paper{
-
-    transform:
-        translateY(0)
-        scale(1);
+.letter-overlay.open .letter-paper{
+    transform:translateY(0) scale(1);
 }
 
 .letter-title{
     text-align:center;
-
-    font-family:
-        "Yu Mincho",
-        serif;
-
     font-size:1.4rem;
-
-    margin-bottom:30px;
+    margin-bottom:24px;
+    color:#b23a1b;
+    font-weight:bold;
 }
 
 .letter-paper p{
-    font-family:
-        "Yu Mincho",
-        serif;
-
-    line-height:2.15;
-
-    font-size:.95rem;
-
-    margin:
-        0 0 20px;
+    line-height:2;
+    margin:0 0 18px;
 }
 
 .signature{
     text-align:right;
-
-    margin-top:35px;
-
-    font-family:
-        "Yu Mincho",
-        serif;
+    margin-top:28px;
 }
 
 .close-letter{
     display:block;
-
-    margin:
-        35px auto 0;
-
-    padding:
-        10px 28px;
-
-    border:1px solid #8b7d70;
-
-    border-radius:100px;
-
-    color:#554b44;
-
-    background:transparent;
-
+    margin:28px auto 0;
+    border:none;
+    background:#d94b2b;
+    color:#fff;
+    padding:10px 24px;
+    border-radius:999px;
     cursor:pointer;
 }
 
-
 /* =========================
-   流れ星
-========================= */
-
-.shooting-star{
-    position:fixed;
-
-    width:140px;
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            white
-        );
-
-    opacity:0;
-
-    z-index:3;
-
-    pointer-events:none;
-
-    transform:
-        rotate(-35deg);
-
-    animation:
-        shoot 1.6s ease-out;
-}
-
-@keyframes shoot{
-    0%{
-        opacity:0;
-        transform:
-            translate(0,0)
-            rotate(-35deg);
-    }
-
-    15%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-
-        transform:
-            translate(-450px,350px)
-            rotate(-35deg);
-    }
-}
-
-
-/* =========================
-   ハート
+   演出
 ========================= */
 
 .falling-heart{
     position:fixed;
-
-    top:-40px;
-
-    z-index:15;
-
+    top:-30px;
+    z-index:30;
     pointer-events:none;
-
-    animation:
-        heartFall linear forwards;
+    animation:heartFall linear forwards;
 }
 
 @keyframes heartFall{
-
     from{
-        transform:
-            translateY(-10vh)
-            rotate(0deg);
-
+        transform:translateY(-10vh) rotate(0deg);
         opacity:1;
     }
-
     to{
-        transform:
-            translateY(115vh)
-            rotate(420deg);
-
+        transform:translateY(110vh) rotate(360deg);
         opacity:0;
     }
 }
-
-
-/* =========================
-   紙吹雪
-========================= */
 
 .confetti{
     position:fixed;
-
     top:-20px;
-
-    width:9px;
-    height:15px;
-
-    z-index:30;
-
+    width:10px;
+    height:16px;
+    z-index:40;
     pointer-events:none;
-
-    animation:
-        confettiFall linear forwards;
+    animation:confettiFall linear forwards;
 }
 
 @keyframes confettiFall{
-
     from{
-        transform:
-            translateY(-10vh)
-            rotate(0deg);
-
+        transform:translateY(-10vh) rotate(0deg);
         opacity:1;
     }
-
     to{
-        transform:
-            translateY(115vh)
-            rotate(720deg);
-
-        opacity:.2;
+        transform:translateY(110vh) rotate(720deg);
+        opacity:.3;
     }
 }
 
-
-/* =========================
-   最終画面
-========================= */
-
-.finished .countdown{
-    display:none;
+.firework{
+    position:fixed;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    z-index:35;
+    pointer-events:none;
+    animation:fireworkBurst 1.2s ease-out forwards;
 }
 
-.final-message{
-    display:none;
-
-    margin-top:35px;
-
-    animation:
-        finalAppear 1.3s ease;
-}
-
-.finished .final-message{
-    display:block;
-}
-
-.final-message h2{
-
-    font-family:
-        "Yu Mincho",
-        serif;
-
-    font-size:
-        clamp(2rem,8vw,3.5rem);
-
-    font-weight:400;
-
-    margin:
-        0 0 20px;
-}
-
-.final-message p{
-    line-height:2;
-
-    color:
-        rgba(255,255,255,.82);
-}
-
-@keyframes finalAppear{
-
-    from{
+@keyframes fireworkBurst{
+    0%{
+        transform:scale(.2);
+        opacity:1;
+        box-shadow:
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor;
+    }
+    100%{
+        transform:scale(1);
         opacity:0;
-        transform:
-            translateY(30px)
-            scale(.9);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
+        box-shadow:
+            0 -55px 0 4px currentColor,
+            48px -28px 0 4px currentColor,
+            48px 28px 0 4px currentColor,
+            0 55px 0 4px currentColor,
+            -48px 28px 0 4px currentColor,
+            -48px -28px 0 4px currentColor;
     }
 }
 
-
 /* =========================
-   スマホ
+   スマホ対応
 ========================= */
 
-@media(max-width:480px){
+@media(max-width:900px){
+    .chikawa,
+    .hatiware,
+    .usagi{
+        width:min(22vw,110px);
+        opacity:.95;
+    }
+}
 
-    .moon{
-        width:90px;
-        height:90px;
-
-        right:3%;
-        top:5%;
+@media(max-width:700px){
+    .side-character{
+        opacity:.85;
     }
 
-    .container{
-        width:92%;
+    .chikawa{
+        left:-8px;
+        bottom:18px;
+        width:88px;
+    }
+
+    .hatiware{
+        right:-8px;
+        top:110px;
+        width:88px;
+    }
+
+    .usagi{
+        right:-8px;
+        bottom:18px;
+        width:88px;
     }
 
     .countdown{
-        gap:6px;
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .time-box{
-        padding:
-            16px 2px;
-
-        border-radius:15px;
-    }
-
-    .letter-paper{
-        padding:
-            38px 25px;
+    .container{
+        padding:30px 20px 26px;
     }
 }
-
 </style>
 </head>
-
-
 <body>
 
-<div id="sky"></div>
-
-<div class="moon"></div>
-
-
-<main
-    class="container"
-    id="main">
-
-    <div class="small-title">
-        UNTIL I SEE YOU AGAIN
+<!-- 上部のお祭り飾り -->
+<div class="festival-top">
+    <div class="lantern-row">
+        <div class="lantern"></div>
+        <div class="lantern"></div>
+        <div class="lantern"></div>
+        <div class="lantern"></div>
+        <div class="lantern"></div>
+        <div class="lantern"></div>
     </div>
-
-    <h1>
-        ちーちゃんに会えるまで
-    </h1>
-
-    <div class="subtitle">
-        Make It Count
-    </div>
-
-
-    <div
-        class="special-label"
-        id="specialLabel">
-    </div>
-
-
-    <div
-        class="countdown"
-        id="countdown">
-
-        <div class="time-box">
-            <span
-                class="number"
-                id="days">
-                00
-            </span>
-
-            <span class="label">
-                DAYS
-            </span>
-        </div>
-
-
-        <div class="time-box">
-            <span
-                class="number"
-                id="hours">
-                00
-            </span>
-
-            <span class="label">
-                HOURS
-            </span>
-        </div>
-
-
-        <div class="time-box">
-            <span
-                class="number"
-                id="minutes">
-                00
-            </span>
-
-            <span class="label">
-                MINUTES
-            </span>
-        </div>
-
-
-        <div class="time-box">
-            <span
-                class="number"
-                id="seconds">
-                00
-            </span>
-
-            <span class="label">
-                SECONDS
-            </span>
-        </div>
-
-    </div>
-
-
-    <div class="message-area">
-
-        <div
-            class="message"
-            id="dailyMessage">
-        </div>
-
-    </div>
-
-
-    <div class="final-message">
-
-        <h2>
-            ついに今日だよ。
-        </h2>
-
-        <p>
-            この日をずっと待ってた。<br>
-            今日は時間なんて気にせず、<br>
-            一緒にいっぱい笑おうね。
-        </p>
-
-    </div>
-
-</main>
-
-
-
-<!-- 秘密の手紙 -->
-
-<button
-    class="letter-button"
-    id="letterButton"
-    aria-label="秘密の手紙">
-
-    💌
-
-</button>
-
-
-<div
-    class="letter-overlay"
-    id="letterOverlay">
-
-    <article class="letter-paper">
-
-        <div class="letter-title">
-            ちーちゃんへ
-        </div>
-
-        <p>
-            この手紙を見つけてくれてありがとう。
-        </p>
-
-        <p>
-            会えない時間が長いと、
-            寂しいなと思うこともあるけど、
-            その分、次に会える日が
-            すごく楽しみになります。
-        </p>
-
-        <p>
-            電話した時間も、
-            何気なく送ったメッセージも、
-            「早く会いたいね」って言ったことも、
-            自分にとっては全部大切な時間です。
-        </p>
-
-        <p>
-            このページを開くたびに、
-            少しずつ数字が小さくなって、
-            ちーちゃんに会える日に
-            近づいていくのを見るのが嬉しいです。
-        </p>
-
-        <p>
-            離れていても、
-            これからもいっぱい話して、
-            いっぱい笑って、
-            いろんな思い出を作っていこうね。
-        </p>
-
-        <p>
-            会えた日は、
-            一緒にいられる時間を
-            思いっきり楽しもう。
-        </p>
-
-        <p>
-            大好きです。
-        </p>
-
-
-        <div class="signature">
-            ― いつも想ってる人より
-        </div>
-
-
-        <button
-            class="close-letter"
-            id="closeLetter">
-
-            手紙を閉じる
-
-        </button>
-
-    </article>
-
+    <div class="festival-line"></div>
 </div>
 
+<!-- サイド画像 -->
+<div class="side-character chikawa">
+    <img src="chikawa.png" alt="chikawa">
+</div>
 
+<div class="side-character hatiware">
+    <img src="hatiware.png" alt="hatiware">
+</div>
+
+<div class="side-character usagi">
+    <img src="usagi.png" alt="usagi">
+</div>
+
+<div class="wrapper">
+    <main class="container" id="main">
+        <div class="small-title">COUNTDOWN TO SEE YOU</div>
+        <h1>君に会えるまで</h1>
+        <div class="subtitle">
+            お祭りみたいに、会える日がどんどん楽しみになるページ
+        </div>
+
+        <div class="special-label" id="specialLabel"></div>
+
+        <div class="countdown" id="countdown">
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">DAYS</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">HOURS</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">MINUTES</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">SECONDS</span>
+            </div>
+        </div>
+
+        <div class="message-area">
+            <div class="message" id="dailyMessage"></div>
+        </div>
+
+        <div class="final-message">
+            <h2>ついに今日だよ！</h2>
+            <p>
+                ずっと楽しみにしてた日がやってきたね。<br>
+                今日はいっぱい笑って、いっぱい思い出作ろう。
+            </p>
+        </div>
+    </main>
+</div>
+
+<!-- 隠し手紙 -->
+<button class="letter-button" id="letterButton" aria-label="秘密の手紙">💌</button>
+
+<div class="letter-overlay" id="letterOverlay">
+    <article class="letter-paper">
+        <div class="letter-title">ちーちゃんへ</div>
+
+        <p>このページを開いてくれてありがとう。</p>
+
+        <p>
+            会えない時間が続いても、
+            次に会える日を楽しみにできるように、
+            このカウントダウンを作りました。
+        </p>
+
+        <p>
+            毎日少しずつ数字が減っていくのを見るたびに、
+            会える日が近づいてるんだなって嬉しくなります。
+        </p>
+
+        <p>
+            離れていても、ちーちゃんのことを大事に思ってるし、
+            次に会える時間をずっと楽しみにしています。
+        </p>
+
+        <p>
+            会えた日は、思いっきり楽しい一日にしようね。
+        </p>
+
+        <p>大好きです。</p>
+
+        <div class="signature">― いつも想ってる人より</div>
+
+        <button class="close-letter" id="closeLetter">手紙を閉じる</button>
+    </article>
+</div>
 
 <script>
-
 /* =========================
    会う日時
 ========================= */
-
-/*
-  月だけ注意！
-
-  JavaScriptでは
-  1月 = 0
-  2月 = 1
-  ...
-  10月 = 9
-
-  なので、
-
-  2026年10月9日 18:00
-
-  は下のようになります。
-*/
-
-const meetingDate =
-    new Date(
-        2026,
-        9,
-        9,
-        18,
-        0,
-        0
-    );
-
+const meetingDate = new Date(2026, 9, 9, 18, 0, 0);
 
 /* =========================
-   普段の日替わりメッセージ
+   メッセージ
 ========================= */
-
 const normalMessages = [
-
-    "今日もまた、会える日に少し近づいた。",
-
-    "離れていても、今日もちーちゃんのことを想ってます。",
-
-    "次に会ったら、まず何を話そうかな。",
-
-    "会えない時間も、ちゃんと二人の時間だと思ってる。",
-
+    "今日もまた、会える日に少し近づいたね。",
+    "会えない時間も、二人の大事な時間だと思ってる。",
+    "次に会えたら何を話そうか考えるだけで楽しい。",
     "今日もちーちゃんが笑って過ごせていますように。",
-
-    "数字がひとつ減るたび、ちょっと嬉しくなる。",
-
-    "早く会いたい。でも待ってる時間も大切にしたい。",
-
-    "今日も一日、一緒に頑張ろうね。",
-
-    "次会ったら、いっぱい笑おう。",
-
-    "声を聞けるだけで嬉しい日もある。",
-
-    "離れている分、会えた日の嬉しさはきっと大きい。",
-
-    "今日もちーちゃんが大好きです。",
-
-    "同じ空の下で、今日もお互い頑張ろう。",
-
-    "会えない日の分まで、会ったらいっぱい話そうね。",
-
-    "次に隣を歩ける日が楽しみです。"
-
+    "数字が減るたびに、ちょっと嬉しくなる。",
+    "会える日まで、お互い頑張ろうね。",
+    "離れていても、気持ちはちゃんと近くにあるよ。",
+    "次会ったら、いっぱい思い出つくろう。",
+    "今日もちーちゃんのことを想ってます。",
+    "会えた日の嬉しさは、きっと特別だね。"
 ];
 
-
-/* =========================
-   HTML取得
-========================= */
-
-const daysEl =
-    document.getElementById("days");
-
-const hoursEl =
-    document.getElementById("hours");
-
-const minutesEl =
-    document.getElementById("minutes");
-
-const secondsEl =
-    document.getElementById("seconds");
-
-const messageEl =
-    document.getElementById(
-        "dailyMessage"
-    );
-
-const specialLabel =
-    document.getElementById(
-        "specialLabel"
-    );
-
-const main =
-    document.getElementById("main");
-
-
-/* =========================
-   星を作る
-========================= */
-
-const sky =
-    document.getElementById("sky");
-
-
-for(let i=0;i<90;i++){
-
-    const star =
-        document.createElement("div");
-
-    star.className="star";
-
-    star.style.left =
-        Math.random()*100+"%";
-
-    star.style.top =
-        Math.random()*100+"%";
-
-    const size =
-        Math.random()*2.2+1;
-
-    star.style.width =
-        size+"px";
-
-    star.style.height =
-        size+"px";
-
-    star.style.animationDelay =
-        Math.random()*4+"s";
-
-    star.style.animationDuration =
-        2+Math.random()*4+"s";
-
-    sky.appendChild(star);
-}
-
-
-/* =========================
-   日替わりメッセージ
-========================= */
-
 function getDailyMessage(){
-
-    const today =
-        new Date();
-
-    /*
-      年月日から数字を作る。
-
-      同じ日は同じ文章、
-      翌日になれば変わる。
-    */
-
-    const key =
-        today.getFullYear()*10000
-        +
-        (today.getMonth()+1)*100
-        +
-        today.getDate();
-
-    const index =
-        key % normalMessages.length;
-
+    const today = new Date();
+    const key = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const index = key % normalMessages.length;
     return normalMessages[index];
 }
 
-
-/* =========================
-   節目判定
-========================= */
-
 function getMilestone(days){
-
     if(days === 30){
         return {
             key:"30",
             label:"あと30日",
-            message:
-                "あと1か月。まだ少し先だけど、ちゃんと近づいてる。",
-            effect:"shoot"
+            message:"あと1か月。ここからもっと楽しみになってくるね。",
+            effect:"firework"
         };
     }
-
     if(days === 10){
         return {
             key:"10",
             label:"あと10日",
-            message:
-                "ついにあと10日。ここからはきっとあっという間。",
-            effect:"shoot"
+            message:"あと10日！ もうすぐって感じがしてきたね。",
+            effect:"firework"
         };
     }
-
     if(days === 7){
         return {
             key:"7",
             label:"あと1週間",
-            message:
-                "来週には、もう隣にいられるんだね。",
+            message:"あと1週間。来週には会えるんだね。",
             effect:"hearts"
         };
     }
-
     if(days === 3){
         return {
             key:"3",
             label:"あと3日",
-            message:
-                "あと3回眠ったら会える。もうすぐ。",
+            message:"あと3日。もうほとんど目前だね。",
             effect:"hearts"
         };
     }
-
     if(days === 1){
         return {
             key:"1",
             label:"明日",
-            message:
-                "明日会えるね。たぶん今日ずっとニヤニヤしてる。",
+            message:"明日会えるね。今日はずっとそわそわしそう。",
             effect:"hearts"
         };
     }
-
     if(days === 0){
         return {
             key:"0",
             label:"今日",
-            message:
-                "今日だよ。やっと会えるね。",
+            message:"今日だよ。ついに会えるね！",
             effect:"special"
         };
     }
-
     return null;
 }
 
+/* =========================
+   取得
+========================= */
+const daysEl = document.getElementById("days");
+const hoursEl = document.getElementById("hours");
+const minutesEl = document.getElementById("minutes");
+const secondsEl = document.getElementById("seconds");
+const messageEl = document.getElementById("dailyMessage");
+const specialLabel = document.getElementById("specialLabel");
+const main = document.getElementById("main");
+
+let lastMilestone = null;
+let finished = false;
 
 /* =========================
-   流れ星
+   演出
 ========================= */
-
-function shootingStars(){
-
-    for(let i=0;i<7;i++){
-
+function heartRain(count=25){
+    const hearts = ["♡","♥","❤","💗"];
+    for(let i=0;i<count;i++){
         setTimeout(()=>{
-
-            const star =
-                document.createElement(
-                    "div"
-                );
-
-            star.className =
-                "shooting-star";
-
-            star.style.left =
-                30+
-                Math.random()*80+
-                "%";
-
-            star.style.top =
-                Math.random()*45+
-                "%";
-
-            document.body
-                .appendChild(star);
-
-            setTimeout(()=>{
-                star.remove();
-            },1700);
-
-        },i*300);
+            const heart = document.createElement("div");
+            heart.className = "falling-heart";
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (16 + Math.random() * 18) + "px";
+            heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(), 7000);
+        }, i * 120);
     }
 }
 
-
-/* =========================
-   ハート
-========================= */
-
-function heartRain(
-    count=25
-){
-
-    const hearts=[
-        "♡",
-        "♥",
-        "🤍"
-    ];
-
-    for(
-        let i=0;
-        i<count;
-        i++
-    ){
-
+function confetti(count=90){
+    const colors = ["#e53935","#1e88e5","#f6c445","#ff8fab","#7bd389"];
+    for(let i=0;i<count;i++){
         setTimeout(()=>{
-
-            const heart =
-                document.createElement(
-                    "div"
-                );
-
-            heart.className =
-                "falling-heart";
-
-            heart.textContent =
-                hearts[
-                    Math.floor(
-                        Math.random()*
-                        hearts.length
-                    )
-                ];
-
-            heart.style.left =
-                Math.random()*100+"vw";
-
-            heart.style.fontSize =
-                14+
-                Math.random()*20+
-                "px";
-
-            heart.style.animationDuration =
-                4+
-                Math.random()*4+
-                "s";
-
-            heart.style.opacity =
-                .4+
-                Math.random()*.6;
-
-            document.body
-                .appendChild(heart);
-
-            setTimeout(()=>{
-                heart.remove();
-            },8500);
-
-        },i*100);
+            const piece = document.createElement("div");
+            piece.className = "confetti";
+            piece.style.left = Math.random() * 100 + "vw";
+            piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+            piece.style.animationDuration = (3 + Math.random() * 3) + "s";
+            document.body.appendChild(piece);
+            setTimeout(()=>piece.remove(), 6500);
+        }, i * 25);
     }
 }
 
-
-/* =========================
-   紙吹雪
-========================= */
-
-function confetti(){
-
-    const colors=[
-        "#ffffff",
-        "#ffeaa7",
-        "#fdcbef",
-        "#a29bfe",
-        "#81ecec"
-    ];
-
-    for(
-        let i=0;
-        i<100;
-        i++
-    ){
-
+function fireworks(count=6){
+    const colors = ["#e53935","#1e88e5","#ffb300","#ff5c8a","#43a047"];
+    for(let i=0;i<count;i++){
         setTimeout(()=>{
-
-            const piece =
-                document.createElement(
-                    "div"
-                );
-
-            piece.className =
-                "confetti";
-
-            piece.style.left =
-                Math.random()*100+
-                "vw";
-
-            piece.style.background =
-                colors[
-                    Math.floor(
-                        Math.random()*
-                        colors.length
-                    )
-                ];
-
-            piece.style.animationDuration =
-                3+
-                Math.random()*4+
-                "s";
-
-            document.body
-                .appendChild(piece);
-
-            setTimeout(()=>{
-                piece.remove();
-            },7500);
-
-        },i*25);
+            const firework = document.createElement("div");
+            firework.className = "firework";
+            firework.style.left = (15 + Math.random() * 70) + "vw";
+            firework.style.top = (18 + Math.random() * 40) + "vh";
+            firework.style.color = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(firework);
+            setTimeout(()=>firework.remove(), 1300);
+        }, i * 250);
     }
 }
 
-
-/* =========================
-   演出管理
-========================= */
-
-let lastMilestone=null;
-
-
-function triggerEffect(
-    milestone
-){
-
+function triggerEffect(milestone){
     if(!milestone) return;
+    if(lastMilestone === milestone.key) return;
 
-    /*
-      同じ演出を1秒ごとに
-      繰り返さないための処理
-    */
+    lastMilestone = milestone.key;
 
-    if(
-        lastMilestone
-        === milestone.key
-    ){
-        return;
+    if(milestone.effect === "firework"){
+        fireworks(7);
     }
 
-    lastMilestone =
-        milestone.key;
-
-
-    if(
-        milestone.effect
-        === "shoot"
-    ){
-
-        shootingStars();
-
-    }
-
-
-    if(
-        milestone.effect
-        === "hearts"
-    ){
-
+    if(milestone.effect === "hearts"){
         heartRain(30);
-
     }
 
-
-    if(
-        milestone.effect
-        === "special"
-    ){
-
-        shootingStars();
-
-        setTimeout(()=>{
-            heartRain(45);
-        },600);
-
+    if(milestone.effect === "special"){
+        fireworks(8);
+        setTimeout(()=>confetti(100), 400);
+        setTimeout(()=>heartRain(35), 700);
     }
 }
-
 
 /* =========================
    カウントダウン
 ========================= */
-
-let finished=false;
-
-
 function updateCountdown(){
+    const now = new Date();
+    const difference = meetingDate - now;
 
-    const now =
-        new Date();
-
-    const difference =
-        meetingDate-now;
-
-
-    /* -------------------------
-       時間になった
-    ------------------------- */
-
-    if(difference<=0){
-
+    if(difference <= 0){
         if(!finished){
-
-            finished=true;
-
-            main.classList
-                .add("finished");
-
-            specialLabel
-                .classList
-                .remove("show");
-
-            messageEl.textContent="";
-
-            confetti();
-
-            shootingStars();
-
-            setTimeout(()=>{
-                heartRain(60);
-            },500);
+            finished = true;
+            main.classList.add("finished");
+            specialLabel.classList.remove("show");
+            messageEl.textContent = "";
+            fireworks(10);
+            setTimeout(()=>confetti(120), 300);
+            setTimeout(()=>heartRain(45), 700);
         }
-
         return;
     }
 
+    const day = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hour = Math.floor(difference / (1000 * 60 * 60)) % 24;
+    const minute = Math.floor(difference / (1000 * 60)) % 60;
+    const second = Math.floor(difference / 1000) % 60;
 
-    /* -------------------------
-       日・時・分・秒
-    ------------------------- */
+    daysEl.textContent = String(day).padStart(2, "0");
+    hoursEl.textContent = String(hour).padStart(2, "0");
+    minutesEl.textContent = String(minute).padStart(2, "0");
+    secondsEl.textContent = String(second).padStart(2, "0");
 
-    const day =
-        Math.floor(
-            difference/
-            (1000*60*60*24)
-        );
-
-    const hour =
-        Math.floor(
-            difference/
-            (1000*60*60)
-        )%24;
-
-    const minute =
-        Math.floor(
-            difference/
-            (1000*60)
-        )%60;
-
-    const second =
-        Math.floor(
-            difference/1000
-        )%60;
-
-
-    daysEl.textContent =
-        String(day)
-        .padStart(2,"0");
-
-    hoursEl.textContent =
-        String(hour)
-        .padStart(2,"0");
-
-    minutesEl.textContent =
-        String(minute)
-        .padStart(2,"0");
-
-    secondsEl.textContent =
-        String(second)
-        .padStart(2,"0");
-
-
-    /* -------------------------
-       節目
-    ------------------------- */
-
-    const milestone =
-        getMilestone(day);
-
+    const milestone = getMilestone(day);
 
     if(milestone){
-
-        specialLabel.textContent =
-            milestone.label;
-
-        specialLabel
-            .classList
-            .add("show");
-
-        messageEl.textContent =
-            milestone.message;
-
-        triggerEffect(
-            milestone
-        );
-
+        specialLabel.textContent = milestone.label;
+        specialLabel.classList.add("show");
+        messageEl.textContent = milestone.message;
+        triggerEffect(milestone);
+    }else{
+        specialLabel.classList.remove("show");
+        messageEl.textContent = getDailyMessage();
+        lastMilestone = null;
     }
-    else{
-
-        specialLabel
-            .classList
-            .remove("show");
-
-        messageEl.textContent =
-            getDailyMessage();
-
-        lastMilestone=null;
-
-    }
-
 }
 
-
 updateCountdown();
-
-setInterval(
-    updateCountdown,
-    1000
-);
-
+setInterval(updateCountdown, 1000);
 
 /* =========================
-   秘密の手紙
+   手紙
 ========================= */
+const letterButton = document.getElementById("letterButton");
+const letterOverlay = document.getElementById("letterOverlay");
+const closeLetter = document.getElementById("closeLetter");
 
-const letterButton =
-    document.getElementById(
-        "letterButton"
-    );
+letterButton.addEventListener("click", ()=>{
+    letterOverlay.classList.add("open");
+});
 
-const overlay =
-    document.getElementById(
-        "letterOverlay"
-    );
+closeLetter.addEventListener("click", ()=>{
+    letterOverlay.classList.remove("open");
+});
 
-const closeLetter =
-    document.getElementById(
-        "closeLetter"
-    );
-
-
-letterButton.addEventListener(
-    "click",
-    ()=>{
-
-        overlay.classList
-            .add("open");
-
+letterOverlay.addEventListener("click", (e)=>{
+    if(e.target === letterOverlay){
+        letterOverlay.classList.remove("open");
     }
-);
+});
 
-
-closeLetter.addEventListener(
-    "click",
-    ()=>{
-
-        overlay.classList
-            .remove("open");
-
+document.addEventListener("keydown", (e)=>{
+    if(e.key === "Escape"){
+        letterOverlay.classList.remove("open");
     }
-);
-
-
-/*
-  手紙の外側を押しても閉じる
-*/
-
-overlay.addEventListener(
-    "click",
-    (event)=>{
-
-        if(event.target===overlay){
-
-            overlay.classList
-                .remove("open");
-
-        }
-
-    }
-);
-
-
-/*
-  ESCキーでも閉じる
-*/
-
-document.addEventListener(
-    "keydown",
-    (event)=>{
-
-        if(event.key==="Escape"){
-
-            overlay.classList
-                .remove("open");
-
-        }
-
-    }
-);
-
+});
 </script>
 
 </body>
